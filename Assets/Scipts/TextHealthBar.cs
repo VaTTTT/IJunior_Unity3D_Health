@@ -18,6 +18,11 @@ public class TextHealthBar : HealthBar
         if (_textField != null)
         {
             _textField.text = _currentHealthPercentage + " / " + _maximalHealthPercentage;
+
+            if (_currentHealthPercentage <= 0)
+            {
+                _textField.text = "DEAD";
+            }
         }
     }
 }

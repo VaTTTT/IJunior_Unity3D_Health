@@ -4,7 +4,6 @@ public abstract class HealthBar : MonoBehaviour
 {
     [SerializeField] protected Health _health;    
 
-
     protected float _currentHealthPercentage = 100;
     protected float _maximalHealthPercentage = 100;
 
