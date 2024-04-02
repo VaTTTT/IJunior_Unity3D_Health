@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     private int _currentValue;
 
     public event UnityAction<int> Changed;
+    public event UnityAction Died;
 
     public int MaximalValue => _maximalValue;
 
@@ -18,14 +19,28 @@ public class Health : MonoBehaviour
 
     public void ApplyDamage(int damage)
     {
-        _currentValue = Mathf.Clamp(_currentValue - damage, 0, _maximalValue);
+        if (damage > 0)
+        {
+            ChangeHealthValue(-damage);
 
-        Changed?.Invoke(_currentValue);
+            if (_currentValue <= 0)
+            { 
+                Died?.Invoke();
+            }
+        }
     }
 
     public void ApplyHealing(int amount)
     {
-        _currentValue = Mathf.Clamp(_currentValue + amount, 0, _maximalValue);
+        if (amount > 0)
+        {
+            ChangeHealthValue(amount);
+        }
+    }
+
+    private void ChangeHealthValue(int value)
+    {
+        _currentValue = Mathf.Clamp(_currentValue + value, 0, _maximalValue);
 
         Changed?.Invoke(_currentValue);
     }

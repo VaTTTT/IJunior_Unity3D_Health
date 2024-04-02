@@ -1,22 +1,38 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SmoothHealthBar : HealthBar
 {
     [SerializeField] private Slider _healthSlider;
-    [SerializeField] private int _barChangingSpeed;
+    [SerializeField] private float _changingSpeed;
 
-    private float _currentFillPercentage = 100;
-    private int _currentHealthPercentage = 100;
+    private float _sliderTargetValue;
+    private float _sliderCurrentValue;
 
-    private void Update()
+    private void Start()
     {
-        _currentFillPercentage = Mathf.MoveTowards(_currentFillPercentage, _currentHealthPercentage, _barChangingSpeed * Time.deltaTime);
-        _healthSlider.value = _currentFillPercentage;
+        _sliderCurrentValue = _healthSlider.maxValue;
     }
 
     protected override void OnHealthChanged(int currentValue)
     { 
-        _currentHealthPercentage = currentValue * 100 / Health.MaximalValue;
+        _sliderTargetValue = currentValue.ConvertTo<float>() / Health.MaximalValue;
+
+        StopCoroutine(nameof(SliderValueSmoothChanger));
+        StartCoroutine(SliderValueSmoothChanger(_changingSpeed));
+    }
+
+    private IEnumerator SliderValueSmoothChanger(float speed)
+    {
+        while (_sliderCurrentValue != _sliderTargetValue)
+        {
+            _sliderCurrentValue = Mathf.MoveTowards(_sliderCurrentValue, _sliderTargetValue, speed * Time.deltaTime);
+
+            _healthSlider.value = _sliderCurrentValue;
+
+            yield return null;
+        }
     }
 }

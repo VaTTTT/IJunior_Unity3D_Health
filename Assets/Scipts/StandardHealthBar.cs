@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +11,7 @@ public class StandardHealthBar : HealthBar
     {
         if (_healthSlider != null)
         {
-            _healthSlider.value = currentValue * 100 / Health.MaximalValue;
+            _healthSlider.value = currentValue.ConvertTo<float>() / Health.MaximalValue;
         }
     }
 }
