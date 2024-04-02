@@ -10,7 +10,6 @@ public class Health : MonoBehaviour
     public event UnityAction<int> Changed;
 
     public int MaximalValue => _maximalValue;
-    public int CurrentValue => _currentValue;
 
     private void Start()
     {
