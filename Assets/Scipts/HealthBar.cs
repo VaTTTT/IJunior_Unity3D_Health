@@ -2,21 +2,19 @@ using UnityEngine;
 
 public abstract class HealthBar : MonoBehaviour
 {
-    [SerializeField] protected Health _health;    
-
-    protected float _currentHealthPercentage = 100;
-    protected float _maximalHealthPercentage = 100;
-
+    [SerializeField] private Health _health;    
     [SerializeField] private Camera _mainCamera;
+
+    protected Health Health => _health;
 
     private void OnEnable()
     {
-        _health.HealthChanged += OnHealthChanged;
+        _health.Changed += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        _health.HealthChanged -= OnHealthChanged;
+        _health.Changed -= OnHealthChanged;
     }
 
     private void LateUpdate()

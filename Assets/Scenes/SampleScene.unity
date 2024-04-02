@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 1520977547}
   _mainCamera: {fileID: 963194227}
-  _healthBar: {fileID: 596913985}
+  _healthSlider: {fileID: 596913985}
   _barChangingSpeed: 25
 --- !u!4 &186432516
 Transform:
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 1520977547}
   _mainCamera: {fileID: 963194227}
-  _healthBar: {fileID: 399245406}
+  _healthSlider: {fileID: 399245406}
 --- !u!4 &1648484447
 Transform:
   m_ObjectHideFlags: 0

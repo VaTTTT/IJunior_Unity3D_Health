@@ -5,24 +5,16 @@ public class TextHealthBar : HealthBar
 {
     [SerializeField] private TextMeshProUGUI _textField;
 
-    private void OnEnable()
+    private void Start()
     {
-        _health.HealthChanged += OnHealthChanged;
-        _textField.text = _currentHealthPercentage + " / " + _maximalHealthPercentage;
+        _textField.text = Health.MaximalValue + " / " + Health.MaximalValue;
     }
 
     protected override void OnHealthChanged(int currentValue)
     {
-        _currentHealthPercentage = currentValue * 100 / _health.MaximalValue;
-
         if (_textField != null)
         {
-            _textField.text = _currentHealthPercentage + " / " + _maximalHealthPercentage;
-
-            if (_currentHealthPercentage <= 0)
-            {
-                _textField.text = "DEAD";
-            }
+            _textField.text = currentValue + " / " + Health.MaximalValue;
         }
     }
 }

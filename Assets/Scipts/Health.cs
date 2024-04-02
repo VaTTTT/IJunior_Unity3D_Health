@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
     
     private int _currentValue;
 
-    public event UnityAction<int> HealthChanged;
+    public event UnityAction<int> Changed;
 
     public int MaximalValue => _maximalValue;
     public int CurrentValue => _currentValue;
@@ -21,18 +21,13 @@ public class Health : MonoBehaviour
     {
         _currentValue = Mathf.Clamp(_currentValue - damage, 0, _maximalValue);
 
-        HealthChanged?.Invoke(_currentValue);
-
-        if (_currentValue == 0)
-        {
-            Destroy(gameObject);
-        }
+        Changed?.Invoke(_currentValue);
     }
 
     public void ApplyHealing(int amount)
     {
         _currentValue = Mathf.Clamp(_currentValue + amount, 0, _maximalValue);
 
-        HealthChanged?.Invoke(_currentValue);
+        Changed?.Invoke(_currentValue);
     }
 }

@@ -3,15 +3,13 @@ using UnityEngine.UI;
 
 public class StandardHealthBar : HealthBar
 {
-    [SerializeField] private Slider _healthBar;
+    [SerializeField] private Slider _healthSlider;
 
     protected override void OnHealthChanged(int currentValue)
     {
-        _currentHealthPercentage = currentValue * 100 / _health.MaximalValue;
-
-        if (_healthBar != null)
+        if (_healthSlider != null)
         {
-            _healthBar.value = _currentHealthPercentage;
+            _healthSlider.value = currentValue * 100 / Health.MaximalValue;
         }
     }
 }
