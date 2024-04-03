@@ -391,7 +391,7 @@ MonoBehaviour:
   _health: {fileID: 1520977547}
   _mainCamera: {fileID: 963194227}
   _healthSlider: {fileID: 596913985}
-  _barChangingSpeed: 25
+  _changingSpeed: 0.5
 --- !u!4 &186432516
 Transform:
   m_ObjectHideFlags: 0
